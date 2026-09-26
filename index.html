@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Tableau de Planning Équipe</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -11,73 +13,113 @@
         body {
             background-color: #1a1a1a;
             font-family: 'Segoe UI', Arial, sans-serif;
-            height: 100vh; width: 100vw; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
         }
         
         .tv-container {
-            width: 100vw; height: 100vh;
-            display: flex; flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
             background: linear-gradient(135deg, #2c3e50, #34495e);
-            overflow: hidden; color: white;
+            overflow: hidden;
+            color: white;
         }
         
         .tv-header {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
-            color: white; padding: 10px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            flex-shrink: 0; height: 80px;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            height: 80px;
         }
         
         .tv-header h1 {
-            margin: 0; font-size: 1.8rem; font-weight: 700;
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .tv-clock { text-align: right; }
         
         .tv-time {
-            font-size: 1.5rem; font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 700;
             background: rgba(0,0,0,0.2);
-            padding: 8px 15px; border-radius: 8px; display: inline-block;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
         }
         
         .tv-date { font-size: 1.1rem; margin-top: 3px; opacity: 0.9; }
         
         .tv-main-area {
-            flex: 1; display: flex; flex-direction: column;
-            overflow: hidden; padding: 8px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 8px;
         }
         
         .table-wrapper {
-            flex: 1; display: flex; flex-direction: column;
-            background-color: #2c3e50; border-radius: 8px;
-            overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #2c3e50;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
         .table-scroll-container {
-            flex: 1; overflow-x: auto; overflow-y: auto;
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: auto;
         }
         
         .table-header {
             background: linear-gradient(135deg, #34495e, #2c3e50);
-            color: white; padding: 10px 3px;
+            color: white;
+            padding: 10px 3px;
             display: grid;
             grid-template-columns: 5% 13% 16% 5% 18% 10% 6% 18% 5%;
-            text-align: center; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.3px;
-            font-size: 1.1rem; flex-shrink: 0; min-width: 800px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            min-width: 800px;
         }
         
-        .rows-container { display: flex; flex-direction: column; min-width: 800px; }
+        .rows-container {
+            display: flex;
+            flex-direction: column;
+            min-width: 800px;
+        }
         
         .table-row {
             display: grid;
             grid-template-columns: 5% 13% 16% 5% 18% 10% 6% 18% 5%;
-            text-align: center; align-items: center;
-            background-color: white; border-bottom: 1px solid #3a506b;
-            min-height: 35px; font-size: 1rem; padding: 4px 3px;
-            transition: all 0.3s ease; color: #333;
+            text-align: center;
+            align-items: center;
+            background-color: white;
+            border-bottom: 1px solid #3a506b;
+            min-height: 35px;
+            font-size: 1rem;
+            padding: 4px 3px;
+            transition: all 0.3s ease;
+            color: #333;
         }
         
         .table-row:nth-child(even) { background-color: #f8f9fa; }
@@ -91,7 +133,8 @@
         }
         
         .today-row .table-cell {
-            color: white !important; font-weight: 700;
+            color: white !important;
+            font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
@@ -106,7 +149,8 @@
         }
         
         .today-row-empty-type .table-cell {
-            color: white !important; font-weight: 700;
+            color: white !important;
+            font-weight: 700;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
         
@@ -127,16 +171,24 @@
         }
         
         .table-cell {
-            padding: 6px 2px; overflow: visible !important;
-            white-space: normal !important; word-wrap: break-word;
-            hyphens: auto; line-height: 1.1;
+            padding: 6px 2px;
+            overflow: visible !important;
+            white-space: normal !important;
+            word-wrap: break-word;
+            hyphens: auto;
+            line-height: 1.1;
             border-right: 1px solid #eee;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100%;
         }
         
         .table-cell.left-align {
-            justify-content: flex-start; text-align: left; padding-left: 8px;
+            justify-content: flex-start;
+            text-align: left;
+            padding-left: 8px;
         }
         
         .table-cell.long-text { font-size: 0.9em; }
@@ -146,46 +198,71 @@
         
         .triangle-cell { color: #e74c3c; font-weight: 700; }
         .triangle-cell::before {
-            content: "▲"; margin-right: 3px;
-            font-size: 0.9rem; color: #e74c3c;
+            content: "▲";
+            margin-right: 3px;
+            font-size: 0.9rem;
+            color: #e74c3c;
         }
         
-        .empty-type-row { color: #7f8c8d !important; background-color: #f1f2f3 !important; }
+        .empty-type-row {
+            color: #7f8c8d !important;
+            background-color: #f1f2f3 !important;
+        }
+        
         .empty-type-row .table-cell { color: #7f8c8d !important; }
         .empty-type-row .equipe-name { color: #7f8c8d !important; }
         .empty-type-row .equipe-name:not(:last-child)::after { color: #95a5a6 !important; }
         .empty-type-row:hover { background-color: #e6e8ea !important; }
         
         .equipe-names {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
         }
         
         .equipe-name {
-            padding: 1px 0; margin: 0;
-            font-size: 0.95em; color: #333;
+            padding: 1px 0;
+            margin: 0;
+            font-size: 0.95em;
+            color: #333;
         }
         
         .equipe-name:not(:last-child)::after {
-            content: " - "; color: #000; font-weight: bold; margin-left: 6px;
+            content: " - ";
+            color: #000;
+            font-weight: bold;
+            margin-left: 6px;
         }
         
         .today-row .equipe-name { color: white; }
         .today-row .equipe-name:not(:last-child)::after { color: rgba(255,255,255,0.8); }
         
         .tv-status {
-            background-color: rgba(0,0,0,0.8); color: white;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
             padding: 8px 15px;
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.95rem; flex-shrink: 0; height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            height: 50px;
         }
         
         .refresh-btn {
             background: linear-gradient(135deg, #3498db, #2980b9);
-            border: none; padding: 6px 12px;
-            font-size: 0.9rem; font-weight: 600; border-radius: 5px;
+            border: none;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            display: flex; align-items: center; gap: 6px;
-            color: white; cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+            cursor: pointer;
         }
         
         .refresh-btn:hover {
@@ -194,117 +271,306 @@
         }
         
         .connection-status {
-            display: inline-flex; align-items: center; gap: 6px;
-            margin-left: 15px; padding: 4px 8px;
-            border-radius: 4px; font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 15px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
         }
         
         .status-indicator {
-            width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
         }
         
         .connection-modal {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.9);
-            display: none; justify-content: center; align-items: center;
+            display: none;
+            justify-content: center;
+            align-items: center;
             z-index: 2000;
         }
         
         .loading-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: rgba(26,26,26,0.9);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
         }
         
         .spinner-border { width: 3rem; height: 3rem; border-width: 0.25rem; }
         .loading-overlay p { font-size: 1.2rem !important; }
         
         .notification {
-            position: fixed; top: 15px; right: 15px;
-            background: #27ae60; color: white;
-            padding: 8px 15px; border-radius: 5px;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #27ae60;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 10000; display: none; font-size: 0.9rem;
+            z-index: 10000;
+            display: none;
+            font-size: 0.9rem;
             animation: slideIn 0.3s ease;
         }
         
         .modal-content {
-            background: white; padding: 20px; border-radius: 8px;
-            max-width: 500px; width: 90%; text-align: center; color: #333;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            color: #333;
         }
         
         .modal-content h3 { font-size: 1.3rem; }
         
         .warning-message {
-            background-color: #f39c12; color: white;
-            padding: 8px; text-align: center;
-            font-weight: bold; font-size: 0.9rem; display: none;
+            background-color: #f39c12;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: none;
         }
         
         .btn-outline-light, .btn-outline-info {
-            padding: 5px 10px; font-size: 0.85rem;
+            padding: 5px 10px;
+            font-size: 0.85rem;
         }
         
         .new-client-highlight {
             animation: blinkNewClient 1s infinite alternate;
-            position: relative; font-weight: 800 !important;
-            color: #ffffff !important; border-radius: 4px;
-            padding: 3px 6px !important; margin: 0 1px;
+            position: relative;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            border-radius: 4px;
+            padding: 3px 6px !important;
+            margin: 0 1px;
         }
         
         .new-client-highlight::before {
-            content: "🆕"; margin-right: 5px;
-            font-size: 0.9rem; animation: pulseIcon 1.5s infinite;
+            content: "🆕";
+            margin-right: 5px;
+            font-size: 0.9rem;
+            animation: pulseIcon 1.5s infinite;
         }
         
         .updated-time-highlight {
             animation: blinkUpdatedTime 1s infinite alternate;
-            position: relative; font-weight: 800 !important;
-            color: #ffffff !important; border-radius: 4px;
-            padding: 3px 6px !important; margin: 0 1px;
+            position: relative;
+            font-weight: 800 !important;
+            color: #ffffff !important;
+            border-radius: 4px;
+            padding: 3px 6px !important;
+            margin: 0 1px;
         }
         
         .updated-time-highlight::before {
-            content: "🕒"; margin-right: 5px;
-            font-size: 0.9rem; animation: pulseIcon 1.5s infinite;
+            content: "🕒";
+            margin-right: 5px;
+            font-size: 0.9rem;
+            animation: pulseIcon 1.5s infinite;
         }
         
         .new-count-badge {
             background: linear-gradient(135deg, #2ecc71, #27ae60);
-            color: white; padding: 2px 6px; border-radius: 10px;
-            font-size: 0.8rem; font-weight: bold; margin-left: 3px;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 3px;
             animation: pulseBadge 2s infinite;
         }
         
         .time-remaining-tooltip {
-            position: absolute; background: rgba(0,0,0,0.8);
-            color: white; padding: 4px 8px; border-radius: 4px;
-            font-size: 0.7rem; z-index: 100;
-            bottom: 100%; left: 50%;
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            z-index: 100;
+            bottom: 100%;
+            left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap; display: none;
+            white-space: nowrap;
+            display: none;
         }
         
         .modal-content button {
-            padding: 6px 12px; font-size: 0.9rem;
+            padding: 6px 12px;
+            font-size: 0.9rem;
         }
         
-        @media (max-width: 768px) {
-            .table-header { font-size: 0.7rem; padding: 6px 2px; }
-            .table-row { font-size: 0.7rem; min-height: 32px; }
-            .equipe-name { font-size: 0.65rem; }
-            .tv-header h1 { font-size: 1rem; }
-            .tv-time { font-size: 0.9rem; padding: 4px 8px; }
-            .tv-date { font-size: 0.7rem; }
-            .tv-status { font-size: 0.65rem; padding: 4px 8px; height: auto; }
-            .refresh-btn { font-size: 0.65rem; padding: 3px 8px; }
-        }
-        
+        /* ============================================ */
+        /* VERSION TRÈS GRAND ÉCRAN (TV 55"+)           */
+        /* ============================================ */
         @media (min-width: 1600px) {
             .table-header { font-size: 1.3rem; }
             .table-row { font-size: 1.2rem; min-height: 50px; }
             .equipe-name { font-size: 1.1rem; }
+        }
+        
+        /* ============================================ */
+        /* VERSION SMARTPHONE - Adaptation complète     */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                min-height: 100vh;
+                width: 100%;
+                overflow-y: auto;
+                overflow-x: hidden;
+                align-items: flex-start;
+            }
+            
+            .tv-container {
+                height: auto;
+                min-height: 100vh;
+                width: 100%;
+            }
+            
+            .tv-header {
+                height: auto;
+                padding: 8px 12px;
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .tv-header h1 {
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .tv-clock {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .tv-time {
+                font-size: 0.85rem;
+                padding: 3px 8px;
+            }
+            
+            .tv-date { font-size: 0.7rem; }
+            
+            .tv-main-area {
+                padding: 4px;
+                height: auto;
+                flex: none;
+            }
+            
+            .table-wrapper {
+                height: auto;
+                flex: none;
+            }
+            
+            .table-scroll-container {
+                overflow-x: auto;
+                overflow-y: visible;
+                max-height: none;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Tableau : largeur mini pour déclencher le scroll horizontal */
+            .table-header,
+            .rows-container {
+                min-width: 900px;
+            }
+            
+            .table-header {
+                font-size: 0.7rem;
+                padding: 6px 2px;
+            }
+            
+            .table-row {
+                font-size: 0.75rem;
+                padding: 4px 2px;
+                min-height: 32px;
+                height: auto !important;
+            }
+            
+            .table-cell {
+                padding: 4px 2px;
+                font-size: 0.72rem;
+            }
+            
+            .equipe-name { font-size: 0.68rem; }
+            .equipe-names { gap: 3px; }
+            
+            /* Barre de statut en colonne */
+            .tv-status {
+                flex-direction: column;
+                height: auto;
+                gap: 6px;
+                padding: 8px;
+                font-size: 0.7rem;
+                text-align: center;
+            }
+            
+            .tv-status > div { width: 100%; }
+            
+            .refresh-btn {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .btn-outline-light, .btn-outline-info {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                margin: 2px 0;
+            }
+            
+            .warning-message { font-size: 0.75rem; }
+            
+            .connection-status {
+                margin-left: 6px;
+                font-size: 0.7rem;
+            }
+            
+            /* Modales : plus compactes */
+            .modal-content {
+                max-width: 95%;
+                padding: 12px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .modal-content h3 { font-size: 1rem; }
+            
+            .modal-content button {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+                margin: 2px 0;
+            }
+            
+            #currentLinkDisplay { font-size: 0.65rem !important; }
+            
+            #newSheetLink { font-size: 0.8rem !important; }
         }
         
         @keyframes blinkNewClient {
@@ -379,6 +645,7 @@
         
         <div id="notification" class="notification"></div>
         
+        <!-- MODAL D'ÉDITION DE LIEN -->
         <div id="editLinkModal" class="connection-modal">
             <div class="modal-content">
                 <h3 style="color: #3498db;">✏️ Mettre à jour le lien Google Sheets</h3>
@@ -404,6 +671,7 @@
             </div>
         </div>
         
+        <!-- MODAL D'AIDE -->
         <div id="helpModal" class="connection-modal">
             <div class="modal-content">
                 <h3 style="color: #2c3e50; font-size: 1.3rem;">❓ Aide - Problèmes de connexion</h3>
@@ -456,7 +724,6 @@
         // ============================================
         
         async function fetchWithFallback(urlWithNoCache, signal) {
-            // Encoder l'URL pour qu'elle soit transmise en un seul paramètre
             const gasUrl = GAS_PROXY_URL + '?url=' + encodeURIComponent(urlWithNoCache);
             
             console.log('🔄 Récupération via GAS proxy...');
@@ -587,6 +854,9 @@
         }
         
         function applyOptimalDimensions(sizes, rowCount) {
+            // Ne pas appliquer les hauteurs fixes sur mobile (casse la lisibilité)
+            if (window.innerWidth <= 768) return;
+            
             const allRows = document.querySelectorAll('.table-row');
             const header = document.querySelector('.table-header');
             allRows.forEach(row => {
@@ -1015,10 +1285,14 @@
             setInterval(cleanOldHighlights, 60000);
             loadData();
             setInterval(() => { if (connectionStatus === 'connected') loadData(); }, AUTO_REFRESH_MINUTES * 60000);
+            
             window.addEventListener('resize', () => {
                 const rowCount = document.querySelectorAll('.table-row').length;
-                if (rowCount > 0) applyOptimalDimensions(calculateOptimalRowHeight(rowCount), rowCount);
+                if (rowCount > 0 && window.innerWidth > 768) {
+                    applyOptimalDimensions(calculateOptimalRowHeight(rowCount), rowCount);
+                }
             });
+            
             document.addEventListener('keydown', e => { if (e.key === 'Escape') hideAllModals(); });
             document.addEventListener('click', e => { if (e.target.classList.contains('connection-modal')) hideAllModals(); });
             initScrollSync();
